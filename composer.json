@@ -1,0 +1,6 @@
+{
+  "name": "the-notable/GaTrackerGen",
+  "autoload": {
+    "psr-4": { "Notable\\GaTrackerGen\\": "src/" }
+  }
+}
