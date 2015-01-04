@@ -1,59 +1,69 @@
 <?php
 
-namespace Yuyangongfu\Library\Frontend\Javascript;
+namespace Notable\GaTrackerGen;
 
-use Yuyangongfu\Library\Frontend\Javascript\GeneratesScriptInterface,
-Yuyangongfu\Library\Frontend\Javascript\HasCallbackInterface;
-
-class SetTimeoutBuilder implements GeneratesScriptInterface, HasCallbackInterface 
+/**
+ * Class SetTimeoutBuilder
+ * @package Notable\GaTrackerGen
+ */
+class SetTimeoutBuilder implements GeneratesScriptInterface, HasCallbackInterface
 {
-	
+
+	/**
+	 * @var string
+     */
 	private $_callback;
-	
+
+	/**
+	 * @var bool
+     */
 	private $_is_callback_closure;
-	
+
+	/**
+	 * @var int
+     */
 	private $_duration;
 	
 	public function __construct()
 	{		
-		$this->_is_callback_closure = TRUE;		
+		$this->_is_callback_closure = true;
 	}
-	
+
 	/**
-	 * @see \Yuyangongfu\Helpers\Javascript\GeneratesScriptInterface::getScript()
+	 * @return string
+	 * @throws \Exception
 	 */
-	public function getScript() 
+	public function getScript()
 	{		
 		if ($this->_callback == '' || $this->_duration == ''){			
-			return FALSE;			
+			throw new \Exception('Callback and Duration must both be set before script can be generated');
 		}
 		
 		$rs = '';
-		
-		if ($this->_is_callback_closure === TRUE){			
+		if ($this->_is_callback_closure === true){
 			$rs .= "setTimeout(function(){";			
 				$rs .= $this->_callback;				
 			$rs .= "}, $this->_duration);";			
-		}
-		else{			
+		} else {
 			$rs .= "setTimeout($this->_callback, $this->_duration);";			
 		}
-		
 		return $rs;		
 	}
-	
+
 	/**
-	 * @see \Yuyangongfu\Helpers\Javascript\HasCallbackInterface::setCallback()
-	 */
-	public function setCallback($string) 
+	 * @param string $string
+	 * @return $this
+     */
+	public function setCallback($string)
 	{
 		$this->_callback = $string;		
 		return $this;		
 	}
 
 	/**
-	 * @see \Yuyangongfu\Helpers\Javascript\HasCallbackInterface::setCallbackIsClosure()
-	 */
+	 * @param bool $bool
+	 * @return $this
+     */
 	public function setCallbackIsClosure($bool)
 	{		
 		$this->_is_callback_closure = $bool;		
@@ -61,13 +71,15 @@ class SetTimeoutBuilder implements GeneratesScriptInterface, HasCallbackInterfac
 	}
 	
 	/**
-	 * @param integer $number
-	 * @return boolean|\Yuyangongfu\Helpers\Javascript\SetTimeoutBuilder
+	 * @param int $number
+	 * @return $this
+	 * @throws \Exception
 	 */
 	public function setDuration($number)
 	{		
-		if (!is_numeric($number)){			
-			return FALSE;			
+		if (!is_numeric($number)){
+			$type = gettype($number);
+			throw new \Exception("Param must be of type 'numeric', '$type' provided");
 		}		
 		$this->_duration = $number;		
 		return $this;		

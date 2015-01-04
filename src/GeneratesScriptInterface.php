@@ -1,8 +1,13 @@
 <?php
 
-namespace Yuyangongfu\Library\Frontend\Javascript;
+namespace Notable\GaTrackerGen;
 
-interface GeneratesScriptInterface {
+/**
+ * Interface GeneratesScriptInterface
+ * @package Notable\GaTrackerGen
+ */
+interface GeneratesScriptInterface
+{
 	
 	/**
 	 * Returns javascript code as a string

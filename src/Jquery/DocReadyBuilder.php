@@ -1,78 +1,71 @@
 <?php
 
-namespace Yuyangongfu\Library\Frontend\Javascript\Jquery;
+namespace Notable\GaTrackerGen\Jquery;
 
-use Yuyangongfu\Library\Frontend\Javascript\HasCallbackInterface,
-Yuyangongfu\Library\Frontend\Javascript\GeneratesScriptInterface;
+use Notable\GaTrackerGen\HasCallbackInterface;
+use Notable\GaTrackerGen\GeneratesScriptInterface;
 
-class DocReadyBuilder implements HasCallbackInterface, GeneratesScriptInterface {
+/**
+ * Class DocReadyBuilder
+ * @package Notable\GaTrackerGen\Jquery
+ */
+class DocReadyBuilder implements HasCallbackInterface, GeneratesScriptInterface
+{
 	
 	/**
 	 * @var boolean
 	 */
 	private $_is_callback_closure;
-	
+
+	/**
+	 * @var string
+     */
 	private $_callback;
 	
-	public function __construct(){
-		
-		$this->_is_callback_closure = TRUE;
-		
+	public function __construct()
+	{
+		$this->_is_callback_closure = true;
 	}
-	
+
 	/**
-	 * @see \Yuyangongfu\Helpers\Javascript\GeneratesScriptInterface::getScript()
-	 */
-	public function getScript() {
-		
+	 * @return string
+	 * @throws \Exception
+     */
+	public function getScript()
+	{
 		if (!isset($this->_callback)){
-			
-			return FALSE;
-			
+			throw new \Exception('Callback must be set before script can be generated');
 		}
 		
 		$rs = '';
-		
-		if ($this->_is_callback_closure === TRUE){
-			
+		if ($this->_is_callback_closure === true){
 			$rs .= '$(document).ready(function(){';
-		
 				$rs .= $this->_callback;
-				
 			$rs .= "});";
-			
-		}
-		else{
-			
+		} else {
 			$rs .= "$(document).ready($this->_callback)";
-			
 		}
-		
 		return $rs;
-
 	}
-	
+
 	/**
-	 * @see \Yuyangongfu\Helpers\Javascript\HasCallbackInterface::setCallback()
-	 */
-	public function setCallback($string) {
-		
+	 * @param string $string
+	 * @return $this
+     */
+	public function setCallback($string)
+	{
 		$this->_callback = $string;
-		
 		return $this;
-
 	}
 
-
 	/**
-	 * @see \Yuyangongfu\Helpers\Javascript\HasCallbackInterface::setCallbackIsClosure()
-	 */
-	public function setCallbackIsClosure($bool){
-		
+	 * @param bool $bool
+	 * @return $this
+     */
+	public function setCallbackIsClosure($bool)
+	{
 		$this->_is_callback_closure = $bool;
-		
 		return $this;
-		
 	}
 	
 }

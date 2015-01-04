@@ -1,7 +1,8 @@
 <?php
-namespace Yuyangongfu\Library\Frontend\Javascript\GoogleAnalytics\EventTracker;
 
-use Yuyangongfu\Library\Frontend\Javascript\GeneratesScriptInterface;
+namespace Notable\GaTrackerGen\EventTracker;
+
+use Notable\GaTrackerGen\GeneratesScriptInterface;
 
 /**
  * Generates Google Analytics javascript event
@@ -49,9 +50,6 @@ class Builder implements GeneratesScriptInterface
         $this->_fields = array();
     }
 
-    /**
-     * @see \Yuyangongfu\Helpers\Javascript\GeneratesScriptInterface::getScript()
-     */
     public function getScript()
     {        
         /* These are all required */
@@ -64,8 +62,8 @@ class Builder implements GeneratesScriptInterface
     }
 
     /**
-     * @param unknown $category            
-     * @return \Yuyangongfu\Helpers\Javascript\GoogleAnalytics\EventTrackerBuilder
+     * @param string $category
+     * @return $this
      */
     public function setCategory($category)
     {
@@ -78,7 +76,7 @@ class Builder implements GeneratesScriptInterface
 
     /**
      * @param string $action            
-     * @return \Yuyangongfu\Helpers\Javascript\GoogleAnalytics\EventTrackerBuilder
+     * @return $this
      */
     public function setAction($action)
     {
@@ -91,7 +89,7 @@ class Builder implements GeneratesScriptInterface
 
     /**
      * @param string $label            
-     * @return \Yuyangongfu\Helpers\Javascript\GoogleAnalytics\EventTrackerBuilder
+     * @return $this
      */
     public function setLabel($label)
     {
@@ -104,7 +102,7 @@ class Builder implements GeneratesScriptInterface
 
     /**
      * @param string $value            
-     * @return \Yuyangongfu\Helpers\Javascript\GoogleAnalytics\EventTrackerBuilder
+     * @return $this
      */
     public function setValue($value)
     {
@@ -118,7 +116,7 @@ class Builder implements GeneratesScriptInterface
     /**
      * @param string $field            
      * @param string $value            
-     * @return \Yuyangongfu\Helpers\Javascript\GoogleAnalytics\EventTrackerBuilder
+     * @return $this
      */
     public function addFieldEntry($field, $value)
     {
@@ -145,7 +143,7 @@ class Builder implements GeneratesScriptInterface
                 return mb_strtolower($string);
             }
         }        
-        return FALSE;
+        return false;
     }
 
     /**
@@ -171,7 +169,6 @@ class Builder implements GeneratesScriptInterface
     }
 
     /**
-     *
      * @param array $fields            
      * @return string
      */
@@ -190,4 +187,5 @@ class Builder implements GeneratesScriptInterface
         $rs .= '}';        
         return $rs;
     }
+
 }

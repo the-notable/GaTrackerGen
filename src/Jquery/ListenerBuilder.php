@@ -1,9 +1,9 @@
 <?php
 
-namespace Yuyangongfu\Library\Frontend\Javascript\Jquery;
+namespace Notable\GaTrackerGen\Jquery;
 
-use Yuyangongfu\Library\Frontend\Javascript\HasCallbackInterface,
-Yuyangongfu\Library\Frontend\Javascript\GeneratesScriptInterface;
+use Notable\GaTrackerGen\HasCallbackInterface,
+	Notable\GaTrackerGen\GeneratesScriptInterface;
 
 /**
  * Generates jquery listener code
@@ -48,26 +48,23 @@ class ListenerBuilder implements HasCallbackInterface, GeneratesScriptInterface
 	
 	public function __construct()
 	{	
-		$this->_callback_is_closure = TRUE;	
+		$this->_callback_is_closure = true;
 	}
 	
 	/**
 	 * Returns javascript code as a string
 	 *
 	 * @return string
+	 * @throws \Exception
 	 */
 	public function getScript()
 	{	
 		/* These are all required */
-		if ($this->_dom_element == ''
-				|| $this->_event_type == ''
-				|| $this->_callback == ''){
-				
-			return FALSE;				
+		if ($this->_dom_element == '' || $this->_event_type == '' || $this->_callback == ''){
+			throw new \Exception('All required properties must be set before script can be generated');
 		}
 	
 		$selector = $this->_buildSelector($this->_dom_element);
-	
 		if ($this->_namespace > ''){
 			$event_string = "$this->_event_type.$this->_namespace";			
 		} else{			
@@ -77,9 +74,8 @@ class ListenerBuilder implements HasCallbackInterface, GeneratesScriptInterface
 		$callback = $this->_callback;
 	
 		$rs = '';
-		
-		if ($this->_callback_is_closure === TRUE){			
-			$rs .= "$selector.on('$event_string', function(){";				
+		if ($this->_callback_is_closure === true){
+			$rs .= $selector.".on('".$event_string."', function(){";
 				$rs .= $callback;				
 			$rs .= "});";			
 		}
@@ -92,7 +88,7 @@ class ListenerBuilder implements HasCallbackInterface, GeneratesScriptInterface
 	
 	/**
 	 * @param string $element
-	 * @return \Yuyangongfu\Helpers\Javascript\Jquery\ListenerBuilder
+	 * @return $this
 	 */
 	public function setDomElement($element)
 	{	
@@ -102,7 +98,7 @@ class ListenerBuilder implements HasCallbackInterface, GeneratesScriptInterface
 	
 	/**
 	 * @param string $namespace
-	 * @return \Yuyangongfu\Helpers\Javascript\Jquery\ListenerBuilder
+	 * @return $this
 	 */
 	public function setNamespace($namespace)
 	{				
@@ -112,23 +108,28 @@ class ListenerBuilder implements HasCallbackInterface, GeneratesScriptInterface
 	
 	/**
 	 * @param string $type
-	 * @return \Yuyangongfu\Helpers\Javascript\Jquery\ListenerBuilder
+	 * @return $this
 	 */
 	public function setEventType($type)
 	{	
 		$this->_event_type = $type;	
 		return $this;	
 	}
-	
+
+	/**
+	 * @param string $callback
+	 * @return $this
+     */
 	public function setCallback($callback)
 	{		
 		$this->_callback = $callback;		
 		return $this;		
 	}
-	
+
 	/**
-	 * @see \Yuyangongfu\Helpers\Javascript\HasCallbackInterface::setCallbackIsClosure()
-	 */
+	 * @param bool $bool
+	 * @return $this
+     */
 	public function setCallbackIsClosure($bool)
 	{		
 		$this->_callback_is_closure = $bool;		

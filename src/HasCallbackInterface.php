@@ -1,8 +1,13 @@
 <?php
 
-namespace Yuyangongfu\Library\Frontend\Javascript;
+namespace Notable\GaTrackerGen;
 
-interface HasCallbackInterface {
+/**
+ * Interface HasCallbackInterface
+ * @package Notable\GaTrackerGen
+ */
+interface HasCallbackInterface
+{
 	
 	/**
 	 * @param boolean $bool

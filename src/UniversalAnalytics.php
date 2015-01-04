@@ -1,8 +1,8 @@
 <?php
 
-namespace Yuyangongfu\Library\Frontend\Javascript\GoogleAnalytics;
+namespace Notable\GaTrackerGen;
 
-use Yuyangongfu\Library\Frontend\Javascript\GeneratesScriptInterface,
+use
 Yuyangongfu\Library\Frontend\Javascript\Jquery\DocReadyBuilder,
 Phalcon\DI\Injectable;
 use Phalcon\Config;

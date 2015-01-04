@@ -1,29 +1,26 @@
 <?php
 
-namespace Yuyangongfu\Library\Frontend\Javascript\GoogleAnalytics\EventTracker;
+namespace Notable\GaTrackerGen\EventTracker;
 
-use Yuyangongfu\Library\Frontend\Javascript\Jquery\ListenerBuilder,
-Yuyangongfu\Library\Frontend\Javascript\GeneratesScriptInterface;
+use Notable\GaTrackerGen\Jquery\ListenerBuilder;
+use Notable\GaTrackerGen\GeneratesScriptInterface;
 
 class OnListenerEvent extends SendOnEventAbstract implements GeneratesScriptInterface 
 {
 		
 	/**
-	 * @var \Yuyangongfu\Library\Frontend\Javascript\Jquery\ListenerBuilder
+	 * @var ListenerBuilder
 	 */
 	private $_ListenerBuilder;
-	
-	public function __construct(ListenerBuilder $JqueryListenerBuilder)
+
+	public function __construct()
 	{		
 		parent::__construct();		
-		$this->_setListenerBuilder($JqueryListenerBuilder);
+		$this->_ListenerBuilder = new ListenerBuilder();
 		$this->_ListenerBuilder->setNamespace('gaeventtracking');		
 	}	
 	
-	/**
-	 * @see \Yuyangongfu\Helpers\Javascript\GeneratesScriptInterface::getScript()
-	 */
-	public function getScript() 
+	public function getScript()
 	{		
 		$event_code = $this->_EventTrackerBuilder->getScript();
 		
@@ -38,12 +35,12 @@ class OnListenerEvent extends SendOnEventAbstract implements GeneratesScriptInte
 			}			
 		}
 		
-		return FALSE;
+		return false;
 	}
 	
 	/**
 	 * @param string $element
-	 * @return \Yuyangongfu\Helpers\Javascript\GoogleAnalytics\EventTracker\OnListenerEventCode
+	 * @return $this
 	 */
 	public function setDomElement($element)
 	{		
@@ -53,20 +50,12 @@ class OnListenerEvent extends SendOnEventAbstract implements GeneratesScriptInte
 	
 	/**
 	 * @param string $type
-	 * @return \Yuyangongfu\Helpers\Javascript\GoogleAnalytics\EventTracker\OnListenerEventCode
+	 * @return $this
 	 */
 	public function setEventType($type)
 	{	
 		$this->_ListenerBuilder->setEventType($type);	
 		return $this;	
-	}
-	
-	/**
-	 * @param ListenerBuilder $ListenerBuilder
-	 */
-	private function _setListenerBuilder(ListenerBuilder $ListenerBuilder)
-	{		
-		$this->_ListenerBuilder = $ListenerBuilder;		
 	}
 	
 }

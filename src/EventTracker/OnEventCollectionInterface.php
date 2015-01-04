@@ -1,8 +1,13 @@
 <?php
 
-namespace Yuyangongfu\Library\Frontend\Javascript\GoogleAnalytics\EventTracker;
+namespace Notable\GaTrackerGen\EventTracker;
 
-interface OnEventCollectionInterface {
+/**
+ * Interface OnEventCollectionInterface
+ * @package Notable\GaTrackerGen\EventTracker
+ */
+interface OnEventCollectionInterface
+{
 	
 	/**
 	 * @param array $array
