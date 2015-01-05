@@ -130,7 +130,7 @@ $settings = array(
 		)
 	),
 	'duration' => 200,						// Optional, duration in milliseconds between attempts (default is 100)
-	'attempts => 75							// Optional, number of times to attempt sending event (default is 50)
+	'attempts' => 75							// Optional, number of times to attempt sending event (default is 50)
 );
 
 $OnReadyEvent = new Notable\GaTrackerGen\EventTracker\OnReadyEvent($settings);
