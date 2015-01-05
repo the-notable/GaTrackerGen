@@ -39,7 +39,7 @@ class OnReadyEvent extends SendOnEventAbstract implements GeneratesScriptInterfa
 		/* Create a random name for the recursive javascript function */
 		$TokenCreator = new CreateToken();
 		$token = $TokenCreator->getToken(10);
-		$this->_js_function_name = "yuyangongfu_$token";
+		$this->_js_function_name = "thenotablegatrackergen_$token";
 
 		/* Set default timeout settings */
 		$this->_SetTimeoutBuilder = new SetTimeoutBuilder();

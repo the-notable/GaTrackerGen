@@ -100,6 +100,23 @@ $listener_code = $ListenerEvent->getScript();
 
 ## Generate Send Google Analytics Event on Jquery Document Ready Event Code
 
+Example Output:
+
+```javascript
+$(document).ready(function(){var thenotablegatrackergen_fZCfXbFVi4 = function(counter){
+		if(typeof ga !== 'undefined'){
+			ga('send', 'event', 'button', 'click', 'nav buttons', '4', {'noninteraction': '1'});
+		} else if (counter < 75){
+			counter++;
+			return setTimeout(function(){thenotablegatrackergen_fZCfXbFVi4(counter);}, 200);
+		} else {
+			console.log('ga not found');					
+		}
+	};
+	thenotablegatrackergen_fZCfXbFVi4(0);
+});
+```
+
 ### Using Fluent Interface
 
 ```php
