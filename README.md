@@ -43,3 +43,20 @@ $settings = array(
 $UniversalAnalytics = new Notable\GaTrackerGen\UniversalAnalytics($settings);
 $tracker_code = $UniversalAnalytics->getScript();
 ```
+
+## Generate Send Google Analytics Event on Jquery Listener Event Code
+
+https://developers.google.com/analytics/devguides/collection/analyticsjs/events
+
+```php
+$ListenerEvent = new Notable\GaTrackerGen\EventTracker\OnListenerEvent();
+$listener_code = $ListenerEvent
+	->setEventType('click') // Required, jquery on event type (click, mouseover, etc)
+	->setDomElement('elementid') // Required, dom element to which listener should be attached
+	->setCategory('button') // Required, analytics event category
+	->setAction('click') // Required, analytics event action
+	->setLabel('nav buttons') // Optional, analytics event label
+	->setValue(4) //Optional, analytics event value
+	->setFieldEntry('nonInteraction', 1) // Optional, use specific field names and values accepted by universal analytics
+	->getScript();
+```

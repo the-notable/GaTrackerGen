@@ -49,6 +49,8 @@ class OnListenerEvent extends SendOnEventAbstract implements GeneratesScriptInte
 	}
 	
 	/**
+	 * This refers to the jquery on event type (click, mouseover, etc)
+	 *
 	 * @param string $type
 	 * @return $this
 	 */
