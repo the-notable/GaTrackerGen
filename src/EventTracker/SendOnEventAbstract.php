@@ -26,6 +26,8 @@ abstract class SendOnEventAbstract
      */
 	public function __construct(array $settings = array())
 	{
+		$this->_EventTrackerBuilder = new Builder();
+		$this->_DocReadyBuilder = new DocReadyBuilder();
 		if(count($settings)){
 			if(isset($settings['category'])){
 				$this->setCategory($settings['category']);
@@ -50,8 +52,6 @@ abstract class SendOnEventAbstract
 				}
 			}
 		}
-		$this->_EventTrackerBuilder = new Builder();
-		$this->_DocReadyBuilder = new DocReadyBuilder();
 	}
 	
 	/**
