@@ -13,17 +13,20 @@ class OnReadyCollection extends OnEventCollectionAbstract
 	 * @var OnReadyEvent
 	 */
 	private $_OnReadyEvent;
-	
-	public function __construct()
+
+	/**
+	 * @param array $multiple_event_settings
+     */
+	public function __construct(array $multiple_event_settings = array())
 	{
-		parent::__construct();
+		parent::__construct($multiple_event_settings);
 		$this->_OnReadyEvent = new OnReadyEvent();
 	}
 	
 	/**
 	 * @return array 
 	 */
-	public function get()
+	public function getArrayOfScripts()
 	{
 		$return_array = array();
 		foreach($this->_ind_events_array as $event_array){
