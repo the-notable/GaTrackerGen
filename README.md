@@ -46,7 +46,7 @@ $tracker_code = $UniversalAnalytics->getScript();
 
 ## Generate Send Google Analytics Event on Jquery Listener Event Code
 
-This code requires jquery to be loaded *BEFORE* it is run
+This code requires jquery to be loaded **BEFORE** it is run
 
 More information on Google Universal Analytics Events can be found here:
 https://developers.google.com/analytics/devguides/collection/analyticsjs/events
@@ -74,4 +74,26 @@ $listener_code = $ListenerEvent
 	->setValue(4) 							// Optional, analytics event value
 	->addFieldEntry('nonInteraction', 1) 	// Optional, use specific field names and values accepted by universal analytics
 	->getScript();
+```
+
+### Passing Settings in Constructor
+
+```php
+$settings = array(
+	'dom_element' => 'element_id',			// Required, dom element to which listener should be attached
+	'event_type' => 'click',				// Required, jquery on event type (click, mouseover, etc)
+	'category' => 'button,					// Required, analytics event category
+	'action' => 'click',					// Required, analytics event action
+	'label' => 'nav buttons',				// Optional, analytics event label
+	'value' => 4,							// Optional, analytics event value
+	'field_entries' => array(				// Optional, use specific field names and values accepted by universal analytics
+		array(								// Each field entry must be added as an array, so multiple arrays may be added
+			'field' => 'nonInteraction',
+			'value' => 1
+		)
+	)
+);
+
+$ListenerEvent = new Notable\GaTrackerGen\EventTracker\OnListenerEvent($settings);
+$listener_code = $ListenerEvent->getScript();
 ```

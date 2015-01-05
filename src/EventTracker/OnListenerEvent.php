@@ -13,13 +13,28 @@ class OnListenerEvent extends SendOnEventAbstract implements GeneratesScriptInte
 	 */
 	private $_ListenerBuilder;
 
-	public function __construct()
+	/**
+	 * @param array $settings
+     */
+	public function __construct(array $settings = array())
 	{		
-		parent::__construct();		
+		parent::__construct($settings);
+		if(count($settings)){
+			if(isset($settings['dom_element'])){
+				$this->setDomElement($settings['dom_element']);
+			}
+			if(isset($settings['event_type'])){
+				$this->setEventType($settings['event_type']);
+			}
+		}
 		$this->_ListenerBuilder = new ListenerBuilder();
 		$this->_ListenerBuilder->setNamespace('gaeventtracking');		
-	}	
-	
+	}
+
+	/**
+	 * @return bool|string
+	 * @throws \Exception
+     */
 	public function getScript()
 	{		
 		$event_code = $this->_EventTrackerBuilder->getScript();

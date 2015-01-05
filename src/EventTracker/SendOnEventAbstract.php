@@ -20,9 +20,36 @@ abstract class SendOnEventAbstract
 	 * @var DocReadyBuilder
      */
 	protected $_DocReadyBuilder;
-	
-	public function __construct()
+
+	/**
+	 * @param array $settings
+     */
+	public function __construct(array $settings = array())
 	{
+		if(count($settings)){
+			if(isset($settings['category'])){
+				$this->setCategory($settings['category']);
+			}
+			if(isset($settings['action'])){
+				$this->setAction($settings['action']);
+			}
+			if(isset($settings['label'])){
+				$this->setLabel($settings['label']);
+			}
+			if(isset($settings['value'])){
+				$this->setValue($settings['value']);
+			}
+			if(isset($settings['field_entries'])){
+				$entries = $settings['field_entries'];
+				if(is_array($entries)){
+					foreach($entries as $entry){
+						if(isset($entry['field']) && isset($entry['value'])){
+							$this->addFieldEntry($entry['field'], $entry['value']);
+						}
+					}
+				}
+			}
+		}
 		$this->_EventTrackerBuilder = new Builder();
 		$this->_DocReadyBuilder = new DocReadyBuilder();
 	}
