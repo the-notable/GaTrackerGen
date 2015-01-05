@@ -13,18 +13,28 @@ abstract class OnEventCollectionAbstract implements OnEventCollectionInterface
 	 * @var array
 	 */
 	protected $_ind_events_array;
-	
-	public function __construct()
+
+	/**
+	 * @param array $multiple_event_settings
+     */
+	public function __construct(array $multiple_event_settings = array())
 	{
 		$this->_ind_events_array = array();
+		if(count($multiple_event_settings)){
+			foreach($multiple_event_settings as $event_settings){
+				$this->pushEventSettings($event_settings);
+			}
+		}
 	}
-	
+
 	/**
 	 * @param array $array
+	 * @return $this
 	 */
-	public function push(array $array)
+	public function pushEventSettings(array $array)
 	{
 		$this->_ind_events_array[] = $array;
+		return $this;
 	}
 	
 	/**
@@ -46,8 +56,15 @@ abstract class OnEventCollectionAbstract implements OnEventCollectionInterface
 		if (isset($array['value'])){
 			$EventObject->setValue($array['value']);
 		}
-		if (isset($array['field_entry'])){
-			$EventObject->addFieldEntry($array['field_entry']['field'], $array['field_entry']['value']);
+		if (isset($array['field_entries'])){
+			$entries = $array['field_entries'];
+			if(is_array($entries)){
+				foreach($entries as $entry){
+					if(isset($entry['field']) && isset($entry['value'])){
+						$EventObject->addFieldEntry($entry['field'], $entry['value']);
+					}
+				}
+			}
 		}
 		return $EventObject;
 	}

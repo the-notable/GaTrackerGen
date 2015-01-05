@@ -153,3 +153,56 @@ $settings = array(
 $OnReadyEvent = new Notable\GaTrackerGen\EventTracker\OnReadyEvent($settings);
 $on_ready_code = $OnReadyEvent->getScript();
 ```
+## Bulk Event Code Generation
+
+The process for creating OnListener event collections and creating OnReady event collections is same.
+
+```php
+$settings = array(
+	array( // Some button 
+		'dom_element' => 'element_id1',			// Required, dom element to which listener should be attached
+		'event_type' => 'click',				// Required, jquery on event type (click, mouseover, etc)
+		'category' => 'button1',				// Required, analytics event category
+		'action' => 'click',					// Required, analytics event action
+		'label' => 'nav buttons',				// Optional, analytics event label
+		'value' => 4,							// Optional, analytics event value
+		'field_entries' => array(				// Optional, use specific field names and values accepted by universal analytics
+			array(								// Each field entry must be added as an array, so multiple arrays may be added
+				'field' => 'nonInteraction',
+				'value' => 1
+			)
+		)
+	),
+	array( // Some other button
+		'dom_element' => 'element_id2',			// Required, dom element to which listener should be attached
+		'event_type' => 'click',				// Required, jquery on event type (click, mouseover, etc)
+		'category' => 'button2',				// Required, analytics event category
+		'action' => 'click',					// Required, analytics event action
+		'label' => 'nav buttons',				// Optional, analytics event label
+		'value' => 4,							// Optional, analytics event value
+		'field_entries' => array(				// Optional, use specific field names and values accepted by universal analytics
+			array(								// Each field entry must be added as an array, so multiple arrays may be added
+				'field' => 'nonInteraction',
+				'value' => 1
+			)
+		)
+	),
+	array( // Another button
+		'dom_element' => 'element_id3',			// Required, dom element to which listener should be attached
+		'event_type' => 'click',				// Required, jquery on event type (click, mouseover, etc)
+		'category' => 'button3',				// Required, analytics event category
+		'action' => 'click',					// Required, analytics event action
+		'label' => 'nav buttons',				// Optional, analytics event label
+		'value' => 4,							// Optional, analytics event value
+		'field_entries' => array(				// Optional, use specific field names and values accepted by universal analytics
+			array(								// Each field entry must be added as an array, so multiple arrays may be added
+				'field' => 'nonInteraction',
+				'value' => 1
+			)
+		)
+	)
+);
+
+$ListenerEventCollection = new Notable\GaTrackerGen\EventTracker\OnListenerCollection($settings);
+$listener_code_array = $ListenerEventCollection->getArrayOfScripts();
+```

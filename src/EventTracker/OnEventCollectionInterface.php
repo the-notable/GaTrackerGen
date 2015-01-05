@@ -12,11 +12,11 @@ interface OnEventCollectionInterface
 	/**
 	 * @param array $array
 	 */
-	function push(array $array);
+	function pushEventSettings(array $array);
 	
 	/**
 	 * @return array
 	 */
-	function get();
+	function getArrayOfScripts();
 	
 }

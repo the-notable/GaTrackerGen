@@ -13,17 +13,20 @@ class OnListenerCollection extends OnEventCollectionAbstract
 	 * @var OnListenerEvent
 	 */
 	private $_OnListenerEvent;
-	
-	public function __construct()
+
+	/**
+	 * @param array $multiple_event_settings
+     */
+	public function __construct(array $multiple_event_settings = array())
 	{
-		parent::__construct();
+		parent::__construct($multiple_event_settings);
 		$this->_OnListenerEvent = new OnListenerEvent();
 	}
 	
 	/**
 	 * @return array 
 	 */
-	public function get()
+	public function getArrayOfScripts()
 	{
 		$return_array = array();
 		foreach($this->_ind_events_array as $event_array){
