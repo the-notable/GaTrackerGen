@@ -51,6 +51,18 @@ This code requires jquery to be loaded *BEFORE* it is run
 More information on Google Universal Analytics Events can be found here:
 https://developers.google.com/analytics/devguides/collection/analyticsjs/events
 
+Example Output:
+
+```javascript
+$(document).ready(function(){
+	$('elementid').on('click.gaeventtracking', function(){
+		ga('send', 'event', 'button', 'click', 'nav buttons', '4', {'noninteraction': '1'});
+	});
+});
+```
+
+### Using Fluent Interface
+
 ```php
 $ListenerEvent = new Notable\GaTrackerGen\EventTracker\OnListenerEvent();
 $listener_code = $ListenerEvent
@@ -60,6 +72,6 @@ $listener_code = $ListenerEvent
 	->setAction('click') 					// Required, analytics event action
 	->setLabel('nav buttons') 				// Optional, analytics event label
 	->setValue(4) 							// Optional, analytics event value
-	->setFieldEntry('nonInteraction', 1) 	// Optional, use specific field names and values accepted by universal analytics
+	->addFieldEntry('nonInteraction', 1) 	// Optional, use specific field names and values accepted by universal analytics
 	->getScript();
 ```
