@@ -55,7 +55,7 @@ Example Output:
 
 ```javascript
 $(document).ready(function(){
-	$('elementid').on('click.gaeventtracking', function(){
+	$('elementid').on('click.gaeventtracking', function(){ // namespace is added to prevent conflict with other listeners on same element
 		ga('send', 'event', 'button', 'click', 'nav buttons', '4', {'noninteraction': '1'});
 	});
 });
@@ -96,4 +96,43 @@ $settings = array(
 
 $ListenerEvent = new Notable\GaTrackerGen\EventTracker\OnListenerEvent($settings);
 $listener_code = $ListenerEvent->getScript();
+```
+
+## Generate Send Google Analytics Event on Jquery Document Ready Event Code
+
+### Using Fluent Interface
+
+```php
+$OnReadyEvent = new Notable\GaTrackerGen\EventTracker\OnReadyEvent();
+$on_ready_code = $OnReadyEvent
+	->setCategory('button') 				// Required, analytics event category
+	->setAction('click') 					// Required, analytics event action
+	->setLabel('nav buttons') 				// Optional, analytics event label
+	->setValue(4) 							// Optional, analytics event value
+	->addFieldEntry('nonInteraction', 1) 	// Optional, use specific field names and values accepted by universal analytics
+	->setDuration(200)						// Optional, duration in milliseconds between attempts (default is 100)
+	->setAttempts(75)						// Optional, number of times to attempt sending event (default is 50)
+	->getScript();
+```
+
+### Passing Settings in Constructor
+
+```php
+$settings = array(
+	'category' => 'button',					// Required, analytics event category
+	'action' => 'click',					// Required, analytics event action
+	'label' => 'nav buttons',				// Optional, analytics event label
+	'value' => 4,							// Optional, analytics event value
+	'field_entries' => array(				// Optional, use specific field names and values accepted by universal analytics
+		array(								// Each field entry must be added as an array, so multiple arrays may be added
+			'field' => 'nonInteraction',
+			'value' => 1
+		)
+	),
+	'duration' => 200,						// Optional, duration in milliseconds between attempts (default is 100)
+	'attempts => 75							// Optional, number of times to attempt sending event (default is 50)
+);
+
+$OnReadyEvent = new Notable\GaTrackerGen\EventTracker\OnReadyEvent($settings);
+$on_ready_code = $OnReadyEvent->getScript();
 ```

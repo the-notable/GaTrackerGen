@@ -27,10 +27,14 @@ class OnReadyEvent extends SendOnEventAbstract implements GeneratesScriptInterfa
 	 * @var string
 	 */
 	private $_js_function_name;
-	
-	public function __construct()
+
+	/**
+	 * @param array $settings
+	 * @throws \Exception
+     */
+	public function __construct(array $settings = array())
 	{		
-		parent::__construct();
+		parent::__construct($settings);
 
 		/* Create a random name for the recursive javascript function */
 		$TokenCreator = new CreateToken();
@@ -45,7 +49,17 @@ class OnReadyEvent extends SendOnEventAbstract implements GeneratesScriptInterfa
 		->setDuration(100);
 		
 		/* Set default times to recursively attempt call */
-		$this->_attempts = 50;		
+		$this->_attempts = 50;
+
+		/* Check settings array for values to override defaults */
+		if(count($settings)){
+			if(isset($settings['duration'])){
+				$this->setDuration($settings['duration']);
+			}
+			if(isset($settings['attempts'])){
+				$this->setAttempts($settings['attempts']);
+			}
+		}
 	}
 
 	/**
