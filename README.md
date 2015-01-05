@@ -46,6 +46,9 @@ $tracker_code = $UniversalAnalytics->getScript();
 
 ## Generate Send Google Analytics Event on Jquery Listener Event Code
 
+This code requires jquery to be loaded *BEFORE* it is run
+
+More information on Google Universal Analytics Events can be found here:
 https://developers.google.com/analytics/devguides/collection/analyticsjs/events
 
 ```php
