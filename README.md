@@ -23,10 +23,10 @@ ga('send', 'pageview');
 ```php
 $UniversalAnalytics = new Notable\GaTrackerGen\UniversalAnalytics();
 $tracker_code = $UniversalAnalytics
-	->setUaId('youruniversalanalyticsid') //Required
-	->setUserId('usersid') // Optional, use if user-id feature is enabled on property
-	->setUseLinkAttribution(true) // Optional, use if link attribution is enabled on property
-	->setUseDemoInterestReports(true) // Optional, use if demographic and interest reports are enabled on property
+	->setUaId('youruniversalanalyticsid') 	// Required
+	->setUserId('usersid') 					// Optional, use if user-id feature is enabled on property
+	->setUseLinkAttribution(true) 			// Optional, use if link attribution is enabled on property
+	->setUseDemoInterestReports(true) 		// Optional, use if demographic and interest reports are enabled on property
 	->getScript();
 ```
 
@@ -51,12 +51,12 @@ https://developers.google.com/analytics/devguides/collection/analyticsjs/events
 ```php
 $ListenerEvent = new Notable\GaTrackerGen\EventTracker\OnListenerEvent();
 $listener_code = $ListenerEvent
-	->setEventType('click') // Required, jquery on event type (click, mouseover, etc)
-	->setDomElement('elementid') // Required, dom element to which listener should be attached
-	->setCategory('button') // Required, analytics event category
-	->setAction('click') // Required, analytics event action
-	->setLabel('nav buttons') // Optional, analytics event label
-	->setValue(4) //Optional, analytics event value
-	->setFieldEntry('nonInteraction', 1) // Optional, use specific field names and values accepted by universal analytics
+	->setEventType('click') 				// Required, jquery on event type (click, mouseover, etc)
+	->setDomElement('elementid') 			// Required, dom element to which listener should be attached
+	->setCategory('button') 				// Required, analytics event category
+	->setAction('click') 					// Required, analytics event action
+	->setLabel('nav buttons') 				// Optional, analytics event label
+	->setValue(4) 							// Optional, analytics event value
+	->setFieldEntry('nonInteraction', 1) 	// Optional, use specific field names and values accepted by universal analytics
 	->getScript();
 ```
