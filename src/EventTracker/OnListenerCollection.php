@@ -20,7 +20,6 @@ class OnListenerCollection extends OnEventCollectionAbstract
 	public function __construct(array $multiple_event_settings = array())
 	{
 		parent::__construct($multiple_event_settings);
-		$this->_OnListenerEvent = new OnListenerEvent();
 	}
 	
 	/**
@@ -30,6 +29,7 @@ class OnListenerCollection extends OnEventCollectionAbstract
 	{
 		$return_array = array();
 		foreach($this->_ind_events_array as $event_array){
+			$this->_OnListenerEvent = new OnListenerEvent();
 			$this->_OnListenerEvent = $this->_returnCommonElements($event_array, $this->_OnListenerEvent);
 			if (isset($event_array['dom_element'])){
 				$this->_OnListenerEvent->setDomElement($event_array['dom_element']);

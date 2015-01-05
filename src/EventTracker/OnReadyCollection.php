@@ -20,7 +20,6 @@ class OnReadyCollection extends OnEventCollectionAbstract
 	public function __construct(array $multiple_event_settings = array())
 	{
 		parent::__construct($multiple_event_settings);
-		$this->_OnReadyEvent = new OnReadyEvent();
 	}
 	
 	/**
@@ -30,6 +29,7 @@ class OnReadyCollection extends OnEventCollectionAbstract
 	{
 		$return_array = array();
 		foreach($this->_ind_events_array as $event_array){
+			$this->_OnReadyEvent = new OnReadyEvent();
 			$this->_OnReadyEvent = $this->_returnCommonElements($event_array, $this->_OnReadyEvent);
 			if (isset($event_array['duration'])){
 				$this->_OnReadyEvent->setDuration($event_array['duration']);
