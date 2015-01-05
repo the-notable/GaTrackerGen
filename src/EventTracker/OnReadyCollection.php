@@ -29,7 +29,7 @@ class OnReadyCollection extends OnEventCollectionAbstract
 		foreach($this->_ind_events_array as $event_array){
 			$this->_OnReadyEvent = $this->_returnCommonElements($event_array, $this->_OnListenerEvent);
 			if (isset($event_array['duration'])){
-				$this->_OnReadyEvent->setDuraction($event_array['duration']);
+				$this->_OnReadyEvent->setDuration($event_array['duration']);
 			}
 			if (isset($event_array['attempts'])){
 				$this->_OnReadyEvent->setAttempts($event_array['attempts']);
