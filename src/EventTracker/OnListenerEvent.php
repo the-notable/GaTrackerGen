@@ -19,6 +19,8 @@ class OnListenerEvent extends SendOnEventAbstract implements GeneratesScriptInte
 	public function __construct(array $settings = array())
 	{		
 		parent::__construct($settings);
+		$this->_ListenerBuilder = new ListenerBuilder();
+		$this->_ListenerBuilder->setNamespace('gaeventtracking');
 		if(count($settings)){
 			if(isset($settings['dom_element'])){
 				$this->setDomElement($settings['dom_element']);
@@ -27,8 +29,6 @@ class OnListenerEvent extends SendOnEventAbstract implements GeneratesScriptInte
 				$this->setEventType($settings['event_type']);
 			}
 		}
-		$this->_ListenerBuilder = new ListenerBuilder();
-		$this->_ListenerBuilder->setNamespace('gaeventtracking');		
 	}
 
 	/**
